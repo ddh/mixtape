@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'thor', '~> 1.0', '>= 1.0.1'
+gem 'require_all', '~> 3.0'
 
 group :develop do
   gem 'pry', '~> 0.12.2'
