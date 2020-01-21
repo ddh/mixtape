@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'require_all'
+
+# require_all makes the following unnecessary
+# lib = File.expand_path("../../lib", __FILE__) # Remove these two lines when...
+# $:.unshift(lib) unless $LOAD_PATH.include?(lib) # ...converting to Gem via Bundler
+
+require_all 'lib'
+
+require "pry"
+binding.pry

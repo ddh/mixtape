@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'require_all'
+require 'pry'
+require_all 'lib'
+
+# lib = File.expand_path("../../lib", __FILE__) # Remove these two lines when...
+# $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib) # ...converting to Gem via Bundler
+
+# Small hack to make sure Thor calls the default task with arguments
+ARGV.unshift(Mixtape::CLI.default_task) unless Mixtape::CLI.all_tasks.has_key?(ARGV[0])
+
+Mixtape::CLI.start(ARGV)
