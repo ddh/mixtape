@@ -18,17 +18,24 @@ class Playlist
     @@playlists << self
   end
 
-  def self.all
-    @@playlists
-  end
-
-
   def add_songs(song_ids)
     # TODO: Add songs from playlist
   end
 
   def remove_songs(song_ids)
     # TODO: Remove songs from playlist
+  end
+
+  def to_h
+    {
+      "id": @id,
+      "user_id": @user_id,
+      "song_ids": @song_ids
+    }
+  end
+
+  def self.all
+    @@playlists
   end
 
 end

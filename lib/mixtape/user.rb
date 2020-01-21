@@ -13,6 +13,13 @@ class User
     @@users << self
   end
 
+  def to_h
+    {
+      "id": @id,
+      "name": @name
+    }
+  end
+
   def self.find(id)
     @@users.find { |user| user.id == id }
   end

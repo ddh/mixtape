@@ -22,4 +22,12 @@ class Song
     @@songs
   end
 
+  def to_h
+    {
+      "id": @id,
+      "artist": @artist,
+      "title": @title
+    }
+  end
+
 end
