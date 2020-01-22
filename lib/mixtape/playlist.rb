@@ -1,6 +1,7 @@
 class Playlist
 
   @@playlists = []
+  @@id_to_assign = 1 # Keeps track of what new playlist ids should be
 
   attr_reader :id, :user, :songs
 
@@ -15,7 +16,16 @@ class Playlist
     @songs = @song_ids.map do |song_id|
       Song.find(song_id)
     end
+
+    set_next_id
+
     @@playlists << self
+  end
+
+  # Keeps track of the next id to assign when "saving"
+  def set_next_id
+    @id = @@id_to_assign if @id.nil? # New playlist!
+    @@id_to_assign = [@@id_to_assign + 1, @id.to_i + 1].max
   end
 
   def add_songs(song_ids)
