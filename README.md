@@ -11,7 +11,7 @@ MixTape Manager is a CLI tool that makes changes to a collection of playlists co
 1. The output file can be found in the `export/` directory
 1. Run from the command line:
     ``` shell
-    mixtape mixtape.json changes_file.json output_file.json
+    bin/mixtape mixtape.json changes_file.json output_file.json
     ```
     where `changes_file.json` is a set of changes you want to apply to the original file, `mixtape.json`. The output file will be written to `export/output_file.json`.
 
