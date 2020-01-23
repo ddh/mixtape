@@ -52,7 +52,7 @@ class Playlist
 
   # Assigns primary id
   def self.assign_instance_id(object)
-    object.id ||= @@id_to_assign
+    object.instance_variable_set(:@id, @@id_to_assign) unless object.id
     @@id_to_assign = [object.id.next, @@id_to_assign.next].max # Takes max to avoid id collisions
     return object.id
   end
