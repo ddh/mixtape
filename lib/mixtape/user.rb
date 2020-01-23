@@ -20,8 +20,12 @@ class User
     }
   end
 
+  def self.all
+    @@users
+  end
+
   def self.find(id)
-    @@users.find { |user| user.id == id }
+    all.find { |object| object.id == id }
   end
 
   def self.all

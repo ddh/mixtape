@@ -14,20 +14,20 @@ class Song
     @@songs << self
   end
 
-  def self.find(id)
-    @@songs.find { |song| song.id == id }
-  end
-
-  def self.all
-    @@songs
-  end
-
   def to_h
     {
       "id": @id,
       "artist": @artist,
       "title": @title
     }
+  end
+
+  def self.all
+    @@songs
+  end
+
+  def self.find(id)
+    all.find { |object| object.id == id }
   end
 
 end

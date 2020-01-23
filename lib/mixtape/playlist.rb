@@ -41,6 +41,15 @@ class Playlist
     @@playlists
   end
 
+  def self.find(id)
+    all.find { |object| object.id == id }
+  end
+
+  def self.destroy(id)
+    destroyed_object = find(id)
+    all.reject! { |object| object.id == destroyed_object.id }
+  end
+
   # Assigns primary id
   def self.assign_instance_id(object)
     object.id ||= @@id_to_assign
