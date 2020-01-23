@@ -99,6 +99,12 @@ RSpec.configure do |config|
 =end
 end
 
+# load all the files in /lib for testing
+require 'require_all'
+require_all 'lib'
+
+require 'pry' # for debugging during testing
+
 # Aruba configs:
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 ::Dir.glob(::File.expand_path('../support/**/*.rb', __FILE__)).each { |f| require_relative f }
