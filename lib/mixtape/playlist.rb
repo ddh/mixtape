@@ -8,7 +8,7 @@ class Playlist
   def initialize(params = {})
     @id = params["id"]
     @user_id = params["user_id"]
-    @song_ids = params["song_ids"] || []
+    @song_ids = params["song_ids"].uniq || []
   end
 
   def save
