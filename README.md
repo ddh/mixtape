@@ -4,6 +4,7 @@ MixTape Manager is a CLI tool that makes changes to a collection of playlists co
 
 ## Installation
 1. Clone this repository
+1. Navigate to the root of the repo
 1. Give permissions to run mixtape: `chmod +x bin/mixtape`
 
 ## Usage
