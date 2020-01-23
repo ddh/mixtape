@@ -14,19 +14,24 @@ class Playlist
   def save
     @user = User.find(@user_id)
     @songs = @song_ids.map do |song_id|
-      Song.find(song_id)
+      song = Song.find(song_id)
+      raise ArgumentError.new("Song (id: #{song_id}) does not exist!") if song.nil?
+      song
     end
 
     self.class.assign_instance_id(self)
     @@playlists << self
   end
 
-  def add_songs(song_ids)
-    # TODO: Add songs from playlist
-  end
+  # TODO: Remove coupling to Song class
+  def add_song(song_id)
+    song = Song.find(song_id)
 
-  def remove_songs(song_ids)
-    # TODO: Remove songs from playlist
+    raise ArgumentError.new("Song (id: #{song_id}) was not found for the given.") if song.nil?
+    raise ArgumentError.new("Song (id: #{song_id}) was already in the playlist.") if @song_ids.include?(song_id)
+
+    @song_ids << song_id
+    @songs << song
   end
 
   def to_h
