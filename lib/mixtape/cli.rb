@@ -16,10 +16,34 @@ module Mixtape
       @users = MixtapeManager.load_users(source_hash["users"])
       @playlists = MixtapeManager.load_playlists(source_hash["playlists"])
 
+      # 3. Iterate through the changes, making changes to internally instantiated data
+      changes_hash["playlists"].each do |playlist_changes|
 
-      # 3. Iterate through the changes of the
-      # TODO: make the changes. Maybe through MixtapeManager or each 'model'
+        playlist_id = playlist_changes["id"]
+        user_id = playlist_changes["user_id"]
+        song_ids = playlist_changes["song_ids"]
 
+        # a. Adding existing song to existing playlist == id.present? && songs.present?
+        if playlist_id && song_ids
+          song_ids.each do |song_id|
+            Playlist.find(playlist_id).add_song(song_id)
+          end
+        end
+
+        # b. Add new playlist (with at least one song) to existing user == user_id.present? && id.nil? && songs.present?
+        if user_id && song_ids
+          Playlist.new(playlist_changes).save
+        end
+
+        # c. Remove existing playlist == id.present? && user_id.nil?
+        if playlist_id && playlist_changes.has_key?("user_id") && user_id.nil?
+          Playlist.destroy(playlist_id)
+        end
+      end
+
+
+      #4. Reload playlists from internal memory, as there may be changes now
+      @playlists = Playlist.all
 
       # 4. Organize the data to be written:
       output_hash = {
