@@ -28,8 +28,4 @@ class User
     all.find { |object| object.id == id }
   end
 
-  def self.all
-    @@users
-  end
-
 end

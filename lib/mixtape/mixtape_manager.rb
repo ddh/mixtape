@@ -20,4 +20,5 @@ class MixtapeManager
     end
     return User.all
   end
+
 end
