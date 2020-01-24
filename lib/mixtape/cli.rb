@@ -54,7 +54,7 @@ module Mixtape
 
 
       # 5. Write to output file
-      Services::FileManager.write_to_file(output_hash, "output.json")
+      Services::FileManager.write_to_file(output_hash, output_file)
 
     end
     default_task :change # Makes it so this command runs by default without having to specify it
