@@ -15,7 +15,7 @@ module Services
     # Writes the file to the root of the project.
     def self.write_to_file(hash = {}, file = nil)
       pretty_hash = JSON.pretty_generate(hash)
-      Dir.mkdir(DEFAULT_OUTPUT_DIRECTORY) unless File.exists?(DEFAULT_OUTPUT_DIRECTORY)
+      Dir.mkdir(DEFAULT_OUTPUT_DIRECTORY) unless Dir.exists?(DEFAULT_OUTPUT_DIRECTORY)
       File.write(DEFAULT_OUTPUT_DIRECTORY + DEFAULT_OUTPUT_FILE_NAME || DEFAULT_OUTPUT_DIRECTORY + file, pretty_hash)
     end
 
