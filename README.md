@@ -3,8 +3,8 @@ MixTape Manager is a CLI tool that makes changes to a collection of playlists co
 
 
 ## Prerequisites
-* Developed with `Ruby 2.6.4`
-* [bundler](https://bundler.io/)
+* Install `Ruby 2.6.4` (may work with earlier versions)
+* Install [bundler](https://bundler.io/)
 
 ## Installation
 1. Clone this repository
