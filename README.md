@@ -83,9 +83,21 @@ The changes take the form of a `.json` file. Take care in how the data is struct
 ### Performance
 * Say we were to provide this tool as an API that is accessible by the Internet...
 * We can increase performance by scaling horizontally, bumping the number of available servers that run the API and put this behind a Load Balancer to handle traffic.
+* We can separate out the writing vs reading into their own standalone services; each with their own resources perhaps.
+* We can only hold so much in-memory data. We can turn the original input source file into a datastore and then the output can be written to this datastore.
+* If the changes file is extremely large, we can make accomodate for this by streaming the changes file or loading each change into an event-queue. A separate worker then can consume each change.
 * If the data is stored in a database, we can create indexes for attributes that are often looked up. e.g. users, songs and playlists
 * We can cache the data so it can be retrieved quicker. Changes to playlists can invalidate and update caches as we see fit.
 
+
+## Post-mortem
+* I had fun working on this project!
+* It got me interested in using `thor` as a tool to build CLIs. I was more familiar with built-in tools like `rake` tasks for `Rails` or just using `OptionParser` for very simple one-file ruby CLI tools.
+* I need to add unit tests for the various models in the app
+* I would like to add a persistence layer to this tool, like a database, to store the data for later use.
+* There's coupling between `Playlist` and `Song` that I would like to fix. Perhaps a join-table of sorts.
+* My `changes.json` file is _very_ picky with how each of the requested features are formatted. If we were to add more features for the project, I would need to change how the app interprets the changes. Perhaps have named actions like "update" or "destroy", much like a CRUD app. Then we can treat the changes file li
+* I would like to add more error handling. I've added a handful of the obvious ones but I certainly did not cover all edge cases.
 
 ## Authors
 @picoPWR
