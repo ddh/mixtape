@@ -2,9 +2,14 @@
 MixTape Manager is a CLI tool that makes changes to a collection of playlists consisting of users and songs.
 
 
+## Prerequisites
+* Developed with `Ruby 2.6.4`
+* [bundler](https://bundler.io/)
+
 ## Installation
 1. Clone this repository
 1. Navigate to the root of the repo
+1. Run `bundle install`
 1. Give permissions to run mixtape: `chmod +x bin/mixtape`
 
 ## Usage
@@ -23,7 +28,7 @@ This sample app currently supports the three requested functions from the exerci
 3. Removes an _existing_ playlist
 
 ### Changes file structure:
-The changes take the form of a `.json` file. Take care in how the data is structured as it determines which of the three supported features is invoked. Please look at the provided `changes.json` file and the following:
+The changes take the form of a `.json` file. Take care in how the data is structured as it determines which of the three supported features is invoked. Please look at the provided `changes.json` file and the following examples. Note that each data structure is a child of `"playlist": {}` and `"id"` refers to the playlist's id.
 1. Adding a song to a playlist must take this form:
     ``` json
     {
@@ -58,6 +63,29 @@ The changes take the form of a `.json` file. Take care in how the data is struct
 * Written in `Ruby`
 * Using `Thor` gem
 * `Rspec` + `Aruba` for testing (pending)
+
+## How do we scale?
+
+### Maintainability
+* I wrote the app in such a way that it supports a single user on a local machine and it only supports a handful of features.
+* This resulted in many design decisions in the codebase that could down the road make it harder to add new features.
+* A lot of the code can be DRY'ed up. For example, I wrote a crude imitation of `ActiveRecord` to handle the pseudo-creation of `playlists`, `songs` and `users` in-memory. A lot of this code is repeated across the classes and this can be cleaned up by creating a class that bundles together shared functionality. I could've went ahead with `ActiveRecord` but I felt it was too much overhead to deal with for such a small use case.
+* This app only supports text files but we could expand to all types of inputs and outputs by adding adapters for databases or different file types.
+* There is a lot of logic contained in `cli.rb` that can be extracted out to other methods or services.
+
+### Accessibility
+* At present, this app has a poor usability outside of tech-savvy individuals who would know how to run this CLI tool.
+* Not only that, the input and outputs are limited to text files and is restricted to local use only.
+* The CLI can only process and produce one file at a time.
+* We could scale for usage by hosting this CLI tool in the cloud for example, behind an API. It would then be able to handle multiple requests.
+* Once "online", we'll have more options to scale
+
+### Performance
+* Say we were to provide this tool as an API that is accessible by the Internet...
+* We can increase performance by scaling horizontally, bumping the number of available servers that run the API and put this behind a Load Balancer to handle traffic.
+* If the data is stored in a database, we can create indexes for attributes that are often looked up. e.g. users, songs and playlists
+* We can cache the data so it can be retrieved quicker. Changes to playlists can invalidate and update caches as we see fit.
+
 
 ## Authors
 @picoPWR
