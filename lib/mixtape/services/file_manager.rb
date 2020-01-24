@@ -1,7 +1,8 @@
 module Services
   class FileManager
 
-    DEFAULT_OUTPUT_FILE_NAME = "export/output.json".freeze
+    DEFAULT_OUTPUT_FILE_NAME = "output.json".freeze
+    DEFAULT_OUTPUT_DIRECTORY = "export/".freeze
 
     # Returns a hash of the provided json file or default.
     # Defaults to reading the mixtape.json at root of project.
@@ -14,7 +15,8 @@ module Services
     # Writes the file to the root of the project.
     def self.write_to_file(hash = {}, file = nil)
       pretty_hash = JSON.pretty_generate(hash)
-      File.write(DEFAULT_OUTPUT_FILE_NAME || file, pretty_hash)
+      Dir.mkdir(DEFAULT_OUTPUT_DIRECTORY) unless File.exists?(DEFAULT_OUTPUT_DIRECTORY)
+      File.write(DEFAULT_OUTPUT_DIRECTORY + DEFAULT_OUTPUT_FILE_NAME || DEFAULT_OUTPUT_DIRECTORY + file, pretty_hash)
     end
 
   end
