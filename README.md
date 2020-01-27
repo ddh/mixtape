@@ -100,7 +100,7 @@ The changes take the form of a `.json` file. Take care in how the data is struct
 * I would like to add more error handling. I've added a handful of the obvious ones but I certainly did not cover all edge cases.
 
 ## Authors
-@picoPWR
+@ddh
 
 ## License
 This program is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
