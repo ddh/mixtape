@@ -104,6 +104,3 @@ The changes take the form of a `.json` file. Take care in how the data is struct
 
 ## License
 This program is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Acknowledgments
-:wave: HighSpot
